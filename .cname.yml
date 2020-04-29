@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/kaqoynuzdgig/public_html/development
+    - /bin/cp src -R $DEPLOYPATH
