@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
+        <title>{{titleStr}}</title>
+        <link rel="stylesheet" href="http://cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+        <style>
+            h2 {text-align:center; line-height: 2}
+            h4 {text-align:center; line-height:.75}
+            div {text-align:center;}
+            section {text-align:center;}
+            table {border:none;}
+            th {border:none; white-space: nowrap;}
+            td {border-left: none; border-right: none; border-bottom:none;}
+        </style>
+    </head>
+    <body>
+        <h2>{{titleStr}}</h2>
+        <h4><strong>Composite Score: </strong>{{compositeScore}}</h4>
+        <h4><strong>Total Time: </strong>{{minsSpent}} minutes</h4>
+        <h4><strong>Time Spent on Wrong Questions: </strong>{{minsSpentOnWrongQuestions}} minutes</h4>
+        <div>
+            <img src='data:image/png;base64,{{encodedTimingFig}}' height="400" width="1200">
+            <section class="container">  
+                {{errorlogDf.to_html(index = false) | safe}}
+            </section class="container">
+        </div>
+    </body>
+</html>
