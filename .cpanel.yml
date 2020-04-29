@@ -1,5 +1,0 @@
----
-deployment:
-  tasks:
-    - export DEVPATH=/home/user/public_html/development
-    - /bin/cp src -R $DEVPATH
