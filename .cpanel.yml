@@ -2,8 +2,4 @@
 deployment:
   tasks:
     - export DEVPATH=/home/user/public_html/development
-    - git checkout development
     - /bin/cp src -R $DEVPATH
-    - export PRODPATH=/home/user/public_html/production
-    - git checkout master
-    - /bin/cp src -R $PRODPATH
