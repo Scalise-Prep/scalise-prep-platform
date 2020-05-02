@@ -4,6 +4,3 @@ deployment:
     - git checkout development
     - export DEPLOYPATH=/home/kaqoynuzdgig/public_html/development
     - /bin/cp -R src $DEPLOYPATH
-    - git checkout master
-    - export DEPLOYPATH=/home/kaqoynuzdgig/public_html/production
-    - /bin/cp -R src $DEPLOYPATH
