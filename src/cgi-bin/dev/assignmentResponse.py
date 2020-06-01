@@ -166,13 +166,6 @@ try:
                             grader.createAssignment(mydb,mycursor,uid,fbTitle,fbLessonType,json.dumps(fbJson),startOfToday,234000)
                             
                         #Assign any dependent lessons
-                        sql = "SELECT * FROM lessonDependencies WHERE parentLessonId =%s"
-                        u = (lessonId, )
-                        mycursor.execute(sql, u)
-                        childLessons = mycursor.fetchall()
-                        for row in childLessons:
-                            grader.assignLesson(mydb,mycursor,uid,row[2],startOfToday+row[3],row[4])
-                        #this dependency encoding is deprecated, but will still leave it in place
                         if "dependentLessons" in lessonJson:
                             for index in range(len(lessonJson["dependentLessons"])):
                                 grader.assignLesson(mydb,mycursor,uid,lessonJson["dependentLessons"][index]["lessonId"],startOfToday+lessonJson["dependentLessons"][index]["startDelay"],lessonJson["dependentLessons"][index]["lessonDuration"])

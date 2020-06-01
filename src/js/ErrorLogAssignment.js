@@ -1,6 +1,8 @@
 class ErrorLogAssignment extends paper.Layer{
 	constructor(canvasWidth,margin,colors,json,stateJson) {
 	    super();
+	    console.log('error log');
+	    console.log(stateJson);
 	    this.json=json;
 	    this.applyMatrix=false;
 	    this.canvasWidth=canvasWidth;

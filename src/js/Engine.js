@@ -12,6 +12,17 @@ class Engine extends paper.Layer{
 		this.height=height;
 		this.oldWindowWidth=1280;
 		
+		/*console.log("actual initial");//this is just a debugging statement, can remove anytime
+	    try{
+            console.log(json.assignments[0].prompt);
+            console.log(json.assignResponse[0]);
+            console.log(json.assignments[1].prompt);
+            console.log(json.assignResponse[1]);
+            console.log(json.assignments[2].prompt);
+            console.log(json.assignResponse[2]);
+        }catch(error){
+            
+        }*/
 		//record all assignResponses in array
 		this.storeAssignResponses();
 		
@@ -162,6 +173,7 @@ class Engine extends paper.Layer{
 		this.assignmentLinksContainer.bounds.top=(this.currentFlashcard<this.json.flashcards.length)?this.flashcard.bounds.bottom+2*this.margin:this.assignmentsText.bounds.bottom+this.margin;
 		this.assignmentPanel.addChild(this.assignmentLinksContainer);
         this.populateAssignments(this.json.assignments);
+        this.storeAssignResponses();
 		//Load the first flashcard
 		this.loadNewFlashcard();
 		
@@ -196,14 +208,38 @@ class Engine extends paper.Layer{
 		//populate the assignment links
 		var assignmentButtonHeight=90;
 		if(this.json.assignments.length>0){
+
+		    var didSIAshift=false;
     		if(this.json.assignments[0].type=='SpacedInterval'){
+    		    var didSIAshift=true;
     		    var sia=this.json.assignments.shift();
-    		    this.json.assignments.sort(this.GetSortOrder("start"));
-    		    this.json.assignments.sort(this.GetSortOrder("due"));
+    		    var siaAssignResponse=this.json.assignResponse.shift();
+    		}
+    		
+    		//SORT BOTH LISTS TOGETHER
+    		//1) combine the arrays:
+            var list = [];
+            for (var i = 0; i < this.json.assignments.length; i++){
+                list.push({'assignments': this.json.assignments[i], 'response': this.json.assignResponse[i]});
+            }
+            
+            //2) sort:
+            list.sort(this.GetSortOrder("start"));
+            list.sort(this.GetSortOrder("due"));
+            
+            //3) separate them back out:
+            for (var j = 0; j < list.length; j++) {
+                this.json.assignments[j] = list[j].assignments;
+                this.json.assignResponse[j] = list[j].response;
+            }
+
+    		//deprecated the following two lines, can remove if/when desired
+    		//this.json.assignments.sort(this.GetSortOrder("start"));
+    		//this.json.assignments.sort(this.GetSortOrder("due"));
+    		
+    		if(didSIAshift){
     		    this.json.assignments.unshift(sia);
-    		}else{
-    		    this.json.assignments.sort(this.GetSortOrder("start"));
-    		    this.json.assignments.sort(this.GetSortOrder("due"));
+    		    this.json.assignResponse.unshift(siaAssignResponse);
     		}
 		}
 		for(var i=0;i<this.json.assignments.length;i++){
@@ -226,9 +262,9 @@ class Engine extends paper.Layer{
 	}
 	GetSortOrder(prop) {  
         return function(a, b) {  
-            if (a[prop] > b[prop]) {  
+            if (a["assignments"][prop] > b["assignments"][prop]) {  
                 return 1;  
-            } else if (a[prop] < b[prop]) {  
+            } else if (a["assignments"][prop] < b["assignments"][prop]) {  
                 return -1;  
             }  
             return 0;  
@@ -432,6 +468,9 @@ class Engine extends paper.Layer{
 	    
 	    //construct a new assignment
 	    this.currentAssignmentId=assignmentId;
+	    console.log('using saved response');
+	    console.log(this.currentAssignmentId);
+	    console.log(this.assignmentResponses);
 	    var stateJson=(this.assignmentResponses.length>this.currentAssignmentId && Object.keys(this.assignmentResponses[this.currentAssignmentId]).length>0)?this.assignmentResponses[this.currentAssignmentId]:null;//possible saved state json
 	    if(this.json.assignments[assignmentId].hasOwnProperty('type') && this.json.assignments[assignmentId].type=="VideoAssignment"){
 	        this.assignment=new VideoAssignment(this.width,this.margin,this.colors,this.json.assignments[assignmentId],stateJson);

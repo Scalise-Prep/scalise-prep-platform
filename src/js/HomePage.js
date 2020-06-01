@@ -6,8 +6,7 @@ class HomePage extends paper.Group{
         
         this.aboutContainer=new paper.Group();
         this.aboutContainer.applyMatrix=false;
-        this.logEnabled=true;
-        
+
         //home panel
         this.homeSectionHeight=650;
         this.homeContainer=new paper.Group();
@@ -650,9 +649,7 @@ class SignupForm extends paper.Group{
         window.dispatchEvent(new CustomEvent('setCredentials',{ detail: params}));
         this.xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                if(this.logEnabled){
-                    console.log(this.responseText);
-                }
+                //console.log(this.responseText);
                 var json=JSON.parse(this.responseText);
                 json.httpDispatcher="signupForm";
                 window.dispatchEvent(new CustomEvent('xhttpReturn',{ detail: json}));
@@ -749,7 +746,7 @@ class LoginForm extends paper.Group{
 	    super();
 	    this.applyMatrix=false;
 	    this.width=500;
-	    this.height=350;
+	    this.height=290;
 	    this.pivot=[0,0];
 	    //bg
 	    this.bg = new paper.Path.Rectangle(new paper.Rectangle(new paper.Point(-this.width/2,-this.height/2), new paper.Size(this.width, this.height)),[25,25]);
@@ -771,17 +768,24 @@ class LoginForm extends paper.Group{
         this.usernameInputText=new InputText("Username",450,50,25,0,"helveticaNeueLight",24,"#000000",colors[1],colors[0],"center",25,false,false);
         this.addChild(this.usernameInputText);
         this.usernameInputText.bounds.centerX=0;
-        this.usernameInputText.bounds.centerY=-37.5;
+        this.usernameInputText.bounds.top=this.titleText.bounds.bottom+20;
         this.usernameInputText.active=true;
         //password input text
         this.passwordInputText=new InputText("Password",450,50,25,0,"helveticaNeueLight",24,"#000000",colors[1],colors[0],"center",25,true,false);
         this.addChild(this.passwordInputText);
         this.passwordInputText.bounds.centerX=0;
-        this.passwordInputText.bounds.centerY=37.5;
+        this.passwordInputText.bounds.top=this.usernameInputText.bounds.bottom+10;
         //add submit button
         //button itself
-        this.submitButton=new Button("loginSubmit",-75,this.height/2-50-30,150,30,"SUBMIT",["#FAF2EF","#E3F6EE","#DDDDDD"],"underwood",24,["#CB6D51","#54c896","#000000"],this.submitForm.bind(this),null,null,"#EFEFEF");
+        this.submitButton=new Button("loginSubmit",-75,0,150,30,"SUBMIT",["#FAF2EF","#E3F6EE","#DDDDDD"],"underwood",24,["#CB6D51","#54c896","#000000"],this.submitForm.bind(this),null,null,"#EFEFEF");
+        this.submitButton.bounds.top=this.passwordInputText.bounds.bottom+20;
         this.addChild(this.submitButton);
+        /*//add forgot password button
+        //button itself
+        this.forgotButton=new Button("forgotPassword",0,0,200,30,"Forgot Password?",["#FFFFFF","#FFFFFF","#FFFFFF"],"helveticaNeueLight",14,["#888888","#54c896","#000000"],this.forgotPasswordClick.bind(this),null,null,"#EFEFEF");
+        this.forgotButton.bounds.centerX=this.submitButton.bounds.centerX;
+        this.forgotButton.bounds.top=this.submitButton.bounds.bottom+3;
+        this.addChild(this.forgotButton);*/
         //response text
         this.feedbackText = new paper.PointText();
 		this.feedbackText.fontFamily="helveticaNeueLight";
@@ -790,7 +794,7 @@ class LoginForm extends paper.Group{
         this.feedbackText.fillColor = colors[2];
         this.feedbackText.content="";
         this.feedbackText.bounds.centerX=this.submitButton.bounds.centerX;
-        this.feedbackText.bounds.top=this.submitButton.bounds.bottom+10;
+        this.feedbackText.bounds.top=this.submitButton.bounds.bottom+2;
         this.addChild(this.feedbackText);
         
         //close button X
@@ -819,6 +823,27 @@ class LoginForm extends paper.Group{
 	    this.feedbackText.content="";
 	    this.sendXHTTP();
 	}
+	forgotPasswordClick(){
+	    if(this.usernameInputText.string.length==0){
+	        this.feedbackText.content="You must enter a username.";
+	        this.usernameInputText.active=true;
+	        this.passwordInputText.active=false;
+	        return;
+	    }
+	    var tempXhttp = new XMLHttpRequest();
+        var params = JSON.stringify({
+          username: this.usernameInputText.string,
+        });
+        tempXhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log("password recovery response: "+this.responseText);
+            }
+        };
+        tempXhttp.open("POST", "cgi-bin/passwordResetRequestCode.py", true);
+        tempXhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        tempXhttp.send(params);
+	    this.feedbackText.content="Password recovery sent. Please check your email.";
+	}
 	sendXHTTP(){
 	    this.feedbackText.content="Logging in. Please wait!";
 	    this.xhttp = new XMLHttpRequest();
@@ -829,10 +854,18 @@ class LoginForm extends paper.Group{
         window.dispatchEvent(new CustomEvent('setCredentials',{ detail: params}));
         this.xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                if(this.logEnabled){
-                    console.log(this.responseText);
-                }
+                console.log(this.responseText);
                 var json=JSON.parse(this.responseText);
+                /*try{
+                    console.log(json.content.assignments[0].prompt);
+                    console.log(json.content.assignResponse[0]);
+                    console.log(json.content.assignments[1].prompt);
+                    console.log(json.content.assignResponse[1]);
+                    console.log(json.content.assignments[2].prompt);
+                    console.log(json.content.assignResponse[2]);
+                }catch(error){
+                    
+                }*/
                 json.httpDispatcher="loginForm";
                 window.dispatchEvent(new CustomEvent('xhttpReturn',{ detail: json}));
             }
