@@ -1,6 +1,13 @@
 # Scalise Prep
 Core web application for scaliseprep.com.
 
+## Installing Python Dependencies
+You can install dependencies you need manually on the server by ssh'ing into it. To do this:
+
+1. Use the following command to connect to the server: `ssh admin@104.197.179.244`. You'll be prompted for a password, which is the firstname of SC's esteemed CEO.
+
+2. You can install dependencies for either python or python3 using `pip install <dep_name>` or `pip3 install <dep_name>` respectively.
+
 ## Deploying
 You can deploy Scalise Prep using git push. To do so follow the steps below.
 
