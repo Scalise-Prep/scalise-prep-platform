@@ -18,7 +18,7 @@ class HomePage extends paper.Group{
         this.homeContainer.addChild(this.homeBG);
         //add text
         var textWidth=2*(canvasWidth-3*padding[0])/3;
-        var homeTextString="The ACT tests college-readiness - so why not use your study time to get more ready? At ScalisePrep, as you raise your scores to get in the door, you'll also shore up the foundational skills you'll need once you get there and master a studying framework to use on the many more tests in your future.\n\nSo, don't just prepare. Prepare to Learn!"  //"Private test prep can be exhorbitantly expensive. Let's change that.\n\nAt Scalise Prep, we are developing a platform to give the experience of elite private tutoring without the expense of an elite private tutor.";
+        var homeTextString="The TEST-ACT tests college-readiness - so why not use your study time to get more ready? At ScalisePrep, as you raise your scores to get in the door, you'll also shore up the foundational skills you'll need once you get there and master a studying framework to use on the many more tests in your future.\n\nSo, don't just prepare. Prepare to Learn!"  //"Private test prep can be exhorbitantly expensive. Let's change that.\n\nAt Scalise Prep, we are developing a platform to give the experience of elite private tutoring without the expense of an elite private tutor.";
         this.homeText = new MultilineText(homeTextString,textWidth,"center","underwood",32,colors[2],3);
         this.homeText.position=[padding[0]+this.homeText.bounds.width/2,padding[1]+(this.homeSectionHeight)/2];
         this.homeContainer.addChild(this.homeText);
