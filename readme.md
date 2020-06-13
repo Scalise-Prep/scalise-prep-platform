@@ -30,3 +30,5 @@ You can deploy Scalise Prep using git push. To do so follow the steps below.
 3. Lastly, deploy your changes the same way as to development, using `git push deploy master`.
 
 4. Once this step is complete, your changes should be live on www.scaliseprep.com. 
+
+Test DLS 11 June 2020
