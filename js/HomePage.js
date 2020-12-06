@@ -3,7 +3,7 @@ class HomePage extends paper.Group{
 	    super();
 	    this.applyMatrix=false;
 	    this.defaultString="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-        
+
         this.aboutContainer=new paper.Group();
         this.aboutContainer.applyMatrix=false;
 
@@ -18,7 +18,7 @@ class HomePage extends paper.Group{
         this.homeContainer.addChild(this.homeBG);
         //add text
         var textWidth=2*(canvasWidth-3*padding[0])/3;
-        var homeTextString="The TEST-ACT tests college-readiness - so why not use your study time to get more ready? At ScalisePrep, as you raise your scores to get in the door, you'll also shore up the foundational skills you'll need once you get there and master a studying framework to use on the many more tests in your future.\n\nSo, don't just prepare. Prepare to Learn!"  //"Private test prep can be exhorbitantly expensive. Let's change that.\n\nAt Scalise Prep, we are developing a platform to give the experience of elite private tutoring without the expense of an elite private tutor.";
+        var homeTextString="Test. The ACT tests college-readiness - so why not use your study time to get more ready? At ScalisePrep, as you raise your scores to get in the door, you'll also shore up the foundational skills you'll need once you get there and master a studying framework to use on the many more tests in your future.\n\nSo, don't just prepare. Prepare to Learn!"  //"Private test prep can be exhorbitantly expensive. Let's change that.\n\nAt Scalise Prep, we are developing a platform to give the experience of elite private tutoring without the expense of an elite private tutor.";
         this.homeText = new MultilineText(homeTextString,textWidth,"center","underwood",32,colors[2],3);
         this.homeText.position=[padding[0]+this.homeText.bounds.width/2,padding[1]+(this.homeSectionHeight)/2];
         this.homeContainer.addChild(this.homeText);
@@ -54,23 +54,23 @@ class HomePage extends paper.Group{
             var path2 = new paper.Path.Line([padding[0]+this.homeText.bounds.width-lineLength,135], [padding[0]+this.homeText.bounds.width,135]);
             path2.strokeColor = colors[0];
             this.branchesContainerTop.addChild(path2);
-            
+
             this.branchesContainerLower=this.branchesContainerTop.clone(); //cloning olive branch to place in another place (below intro blurb)
             this.branchesContainerLower.rotation=180;
             this.branchesContainerLower.bounds.bottom=this.homeSectionHeight-110+2*padding[1];
-            
+
             this.branchesContainerAbout=this.branchesContainerTop.clone(); //cloning olive branch to place in another place (below course features)
             this.aboutContainer.addChild(this.branchesContainerAbout);
             this.branchesContainerAbout.bounds.centerY=0;
             this.branchesContainerAbout.bounds.centerX=canvasWidth/2;
-            
+
             this.branchesContainerAboutLower=this.branchesContainerTop.clone(); //cloning olive branch to place in another place (below meet tutor)
             this.aboutContainer.addChild(this.branchesContainerAboutLower);
             this.aboutContainer.bringToFront();
             this.branchesContainerAboutLower.rotation=180;
             this.branchesContainerAboutLower.bounds.centerY=this.aboutBG.bounds.height;
             this.branchesContainerAboutLower.bounds.centerX=canvasWidth/2;
-            
+
             this.branchesContainerFAQLower=this.branchesContainerAbout.clone(); //cloning olive branch to place in another place (below FAQ)
             this.faqContainer.addChild(this.branchesContainerFAQLower);
             this.branchesContainerFAQLower.bounds.centerY=this.faqContainer.bounds.height;
@@ -195,7 +195,7 @@ class HomePage extends paper.Group{
         //add a submit button
         this.signupButton2=new Button("signup2",canvasWidth/2-75,this.productsText4.bounds.bottom+15,150,40,"SIGN UP",["#FAF2EF","#E3F6EE","#DDDDDD"],"underwood",28,["#CB6D51","#54c896","#000000"],function(){window.dispatchEvent(new CustomEvent('requestPopup',{ detail: "SignupForm"}));}.bind(this),null,null);
         this.productsContainer.addChild(this.signupButton2);
-        
+
         //about panel
         //construct panel
         this.aboutSectionHeight=610; //height of about section
@@ -222,13 +222,13 @@ class HomePage extends paper.Group{
         this.aboutText.bounds.left=padding[0]+padding[1]+300;
         this.aboutText.bounds.top=this.aboutTitleText.bounds.bottom+padding[1];
         this.aboutContainer.addChild(this.aboutText);
-        
+
         textWidth=canvasWidth-2*padding[0]-padding[1];
         this.aboutText2 = new MultilineText(aboutString2,textWidth,"left","helveticaNeueLight",18,colors[2],1);
         this.aboutText2.bounds.left=padding[0]+padding[1];
         this.aboutText2.bounds.top=this.aboutText.bounds.bottom+padding[1];
         this.aboutContainer.addChild(this.aboutText2);
-        
+
         //add about picture
         this.krs = new paper.Raster("images/krs.jpg");
         this.krs.visible=false;
@@ -239,7 +239,7 @@ class HomePage extends paper.Group{
             this.krs.bounds.left=padding[0];
             this.krs.visible=true;
         }.bind(this);
-        
+
         //FAQ panel
         //construct panel
         this.faqSectionHeight=460; //height of section
@@ -299,7 +299,7 @@ class HomePage extends paper.Group{
         //add a submit button
         this.signupButton3=new Button("signup3",canvasWidth/2-75,this.faqText3.bounds.bottom+30,150,40,"SIGN UP",["#FAF2EF","#E3F6EE","#DDDDDD"],"underwood",28,["#CB6D51","#54c896","#000000"],function(){window.dispatchEvent(new CustomEvent('requestPopup',{ detail: "SignupForm"}));}.bind(this),null,null);
         this.faqContainer.addChild(this.signupButton3);
-        
+
         //Contact Panel
         //construct panel
         this.contactSectionHeight=650;
@@ -356,7 +356,7 @@ class HomePage extends paper.Group{
         this.contactFeedbackText.bounds.centerX=this.contactButton.bounds.centerX;
         this.contactFeedbackText.bounds.top=this.contactButton.bounds.bottom+10;
         this.contactContainer.addChild(this.contactFeedbackText);
-        
+
         //load menu buttons
         var buttonWidth=100;
         var logoHeight=55;
@@ -536,7 +536,7 @@ class SignupForm extends paper.Group{
         this.titleText.content="SIGN UP";
         this.titleText.position=[0,-this.height/2+25+this.titleText.bounds.height/2];
         this.addChild(this.titleText);
-        
+
         //referral explanation text
         this.referralExplainText = new paper.PointText();
 		this.referralExplainText.fontFamily="helveticaNeueLight";
@@ -581,11 +581,11 @@ class SignupForm extends paper.Group{
         this.feedbackText.bounds.centerX=this.submitButton.bounds.centerX;
         this.feedbackText.bounds.top=this.submitButton.bounds.bottom+10;
         this.addChild(this.feedbackText);
-        
+
         //close button X
         this.closeButton=new Button("close",-this.width/2+12.5,-this.height/2+12.5,25,25,"X",["#FFFFFF","#FFFFFF","#FFFFFF"],"underwood",24,[colors[2],colors[1],colors[0]],function(){window.dispatchEvent(new CustomEvent('requestClosePopup'));},null,null);
         this.addChild(this.closeButton);
-        
+
         //listeners
         this.keyDownCallback=this.onKeyDown.bind(this);
         window.addEventListener('keydown', this.keyDownCallback);
@@ -796,7 +796,7 @@ class LoginForm extends paper.Group{
         this.feedbackText.bounds.centerX=this.submitButton.bounds.centerX;
         this.feedbackText.bounds.top=this.submitButton.bounds.bottom+2;
         this.addChild(this.feedbackText);
-        
+
         //close button X
         this.closeButton=new Button("close",-this.width/2+12.5,-this.height/2+12.5,25,25,"X",["#FFFFFF","#FFFFFF","#FFFFFF"],"underwood",24,[colors[2],colors[1],colors[0]],function(){window.dispatchEvent(new CustomEvent('requestClosePopup'));},null,null);
         this.addChild(this.closeButton);
@@ -864,7 +864,7 @@ class LoginForm extends paper.Group{
                     console.log(json.content.assignments[2].prompt);
                     console.log(json.content.assignResponse[2]);
                 }catch(error){
-                    
+
                 }*/
                 json.httpDispatcher="loginForm";
                 window.dispatchEvent(new CustomEvent('xhttpReturn',{ detail: json}));
