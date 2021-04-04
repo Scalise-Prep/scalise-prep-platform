@@ -1,6 +1,11 @@
 # Scalise Prep
 Core web application for scaliseprep.com.
 
+## Set up remote
+In your local version of the repo, add the deployment remote. From within the repo folder, paste the following:
+
+```git remote add deploy ssh://admin@104.197.179.244/home/admin/scalise-prep-platform.git```
+
 ## Deploying
 You can deploy Scalise Prep using git push. To do so follow the steps below.
 
