@@ -19,7 +19,7 @@ You can deploy Scalise Prep using git push. To do so follow the steps below.
 
 4. After this has completed, run `git push deploy development` to deploy your code to the development server. You'll be prompted for a password. It's the first name of the Scalise Prep CEO :)
 
-5. Once this step is complete, you should be able to view your changes on https://dev.scaliseprep.com
+5. Once this step is complete, you should be able to view your changes on dev.scaliseprep.com
 
 ## Deploying to Production
 

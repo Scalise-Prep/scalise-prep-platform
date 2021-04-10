@@ -17,3 +17,4 @@ try:
 
 except Exception as e:
   print(e)
+  print("Karina added this line to troubleshoot")
